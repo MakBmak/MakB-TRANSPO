@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10263a" />
+  <title>Transport Schedule</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="van">🚐</div>
+    <h1>Transport Schedule</h1>
+    <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙️</button>
+  </header>
+
+  <main>
+    <section class="route-card">
+      <div class="place"><input id="locH" value="H" maxlength="8"><span id="locHName">Home</span></div>
+      <div class="leg"><span>🚗</span><b id="timeHU">15 min</b><small>Travel Time</small></div>
+      <div class="place blue"><input id="locUB" value="UB" maxlength="8"><span id="locUBName">Upper Base</span></div>
+      <div class="leg"><span>🚗</span><b id="timeUS">15 min</b><small>Travel Time</small></div>
+      <div class="place purple"><input id="locST" value="ST" maxlength="8"><span id="locSTName">Studio</span></div>
+    </section>
+
+    <section class="actions-row">
+      <h2>📅 Today's Schedule</h2>
+      <button id="editBtn" class="primary small">✏️ Edit Journeys</button>
+    </section>
+
+    <section id="warning" class="warning hidden"></section>
+
+    <section class="drivers">
+      <div class="driver mk">
+        <div class="driver-head"><div class="carpic">🚐</div><div><h2>MK</h2><span id="mkStatus" class="status">Available ✅</span></div></div>
+        <div id="mkList" class="journey-list"></div>
+        <button class="add-driver" data-driver="MK">+ Add to MK</button>
+      </div>
+      <div class="driver cy">
+        <div class="driver-head"><div class="carpic">🚙</div><div><h2>CY</h2><span id="cyStatus" class="status">Available ✅</span></div></div>
+        <div id="cyList" class="journey-list"></div>
+        <button class="add-driver" data-driver="CY">+ Add to CY</button>
+      </div>
+    </section>
+
+    <button id="addJourney" class="primary big">+ Add Passenger / Journey</button>
+
+    <section class="bottom-buttons">
+      <button id="changeLocations">📍<span>Change<br>Locations</span></button>
+      <button id="changeTimes">🚗<span>Travel<br>Times</span></button>
+      <button id="passengersBtn">👥<span>Passengers</span></button>
+      <button id="resetBtn">🗓️<span>Reset<br>Schedule</span></button>
+    </section>
+
+    <section class="legend"><span>✅ Available</span><span>🕘 On Trip</span><span>🔴 Conflict</span></section>
+  </main>
+
+  <dialog id="journeyDialog">
+    <form method="dialog" id="journeyForm">
+      <h2 id="dialogTitle">Add Journey</h2>
+      <input type="hidden" id="journeyId" />
+      <label>Passenger(s)<input id="passengers" placeholder="E or J+R" required></label>
+      <label>From<input id="fromLoc" placeholder="H" required></label>
+      <label>To<input id="toLoc" placeholder="UB" required></label>
+      <label>Leave Time<input id="leaveTime" type="time" required></label>
+      <label>Driver<select id="driver"><option>MK</option><option>CY</option></select></label>
+      <menu><button value="cancel">Cancel</button><button id="deleteJourney" type="button" class="danger hidden">Delete</button><button id="saveJourney" value="default" class="primary">Save</button></menu>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" id="settingsForm">
+      <h2>Settings</h2>
+      <label>Location 1<input id="setH" value="H"></label>
+      <label>Location 2<input id="setUB" value="UB"></label>
+      <label>Location 3<input id="setST" value="ST"></label>
+      <label>Minutes Location 1 → 2<input id="setHU" type="number" min="1" value="15"></label>
+      <label>Minutes Location 2 → 3<input id="setUS" type="number" min="1" value="15"></label>
+      <menu><button value="cancel">Cancel</button><button id="saveSettings" class="primary" value="default">Save</button></menu>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
